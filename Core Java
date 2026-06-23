@@ -141,3 +141,62 @@ public class exercise
     }
 
 }
+
+26. Thread Creation
+
+class A implements Runnable{
+    public void run(){
+        for(int i=0;i<5;i++){
+            System.out.println("Spotify Playing...");
+        }
+    }
+}
+class B implements Runnable{
+    public void run(){
+        for(int i=0;i<5;i++){
+            System.out.println("Studying...");
+        }
+    }
+}
+class Threads{
+    public static void main(String[] args){
+        A obj1=new A();
+        B obj2=new B();
+        Thread t1=new Thread(obj1);
+        t1.start();
+        Thread t2=new Thread(obj2);
+        t2.start();
+        
+    }
+}
+
+24. ArrayList Example
+import java.util.ArrayList;
+
+public class Arraylist {
+    public static void main(String[] args){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Ranjani");
+        list.add("Ganeshan");
+        list.add("Kaviya");
+        list.add("Sumathi");
+        for(String s:list){
+            System.out.println(s);
+        }
+    }
+}
+
+25.HashMap Example
+import java.util.*;
+public class hash{
+    public static void main(String[] args){
+        HashMap<Integer,String> map=new HashMap<>();
+        map.put(1,"Ranjani");
+        map.put(2,"Ganeshan");
+        map.put(3,"Kaviya");
+        map.put(4,"Sumathi");
+        for(int key:map.keySet()){
+            System.out.println(key+" "+map.get(key));
+        }
+    }
+}
