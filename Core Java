@@ -1,1 +1,118 @@
+17. Class and Object Creation
+import java.util.*;
+class Car{
+    String make;
+    String model;
+    int year;
+    public void show(){
+        System.out.println("Make: "+make);
+        System.out.println("Model: "+model);
+        System.out.println("Year: "+year);
+    }
+}
+public class ClassObj {
+    public static void main(String[] args) {
+        Car obj1 = new Car();
+        obj1.make = "Camry";
+        obj1.model = "Toyota";
+        obj1.year = 2021;
 
+        Car obj2=new Car();
+        obj2.make="Civic";
+        obj2.model="BMW";
+        obj2.year=2021;
+        obj1.show();
+        obj2.show();
+
+    }
+}
+
+18. Inheritance Example
+import java.util.*;
+class Animal{
+    public void makeSound(){
+        System.out.println("Making sound");
+    }
+}
+class Dog extends Animal{
+    @Override
+    public void makeSound() {
+        System.out.println("Bark");
+    }
+}
+public class Inherit{
+    public static void main(String[] args){
+        Animal obj=new Animal();
+        Dog obj1=new Dog();
+        obj.makeSound();
+        obj1.makeSound();
+    }
+}
+
+19. Interface Implementation
+import java.util.*;
+interface Playable{
+     void play(String msg);
+}
+class Guitar implements Playable{
+    @Override
+    public void play(String msg){
+        System.out.println(msg);
+    }
+}
+class Piano implements Playable{
+    @Override
+    public void play(String msg){
+        System.out.println("Playing Piano...");
+    }
+}
+public class Interface{
+    public static void main(String[] args){
+        Playable guitar=new Guitar();
+        guitar.play("Playing Guitar...");
+        Playable piano=new Piano();
+        piano.play("Playing Piano...");
+
+    }
+}
+
+20. Try-catch Example
+import java.util.*;
+public class trycatch{
+    public static void main(String[] args){
+        try{
+            int a=10;
+            int b=0;
+            int c=a/b;
+            System.out.println(c);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+}
+
+21. File Writing
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.util.*;
+public class exercise{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        try{
+            String filename=in.nextLine();
+            String str1=in.nextLine();
+            String str2=in.nextLine();
+            FileWriter fw=new FileWriter(filename);
+            BufferedWriter bw=new BufferedWriter(fw);
+            bw.write(str1);
+            bw.newLine();
+            bw.write(str2);
+            bw.close();
+            System.out.print("Success");
+        }
+        catch(Exception e){
+            System.out.println("Something went wrong");
+        }
+    }
+}
