@@ -200,3 +200,54 @@ public class hash{
         }
     }
 }
+
+27. Lamda Expressions
+import java.util.*;
+import java.lang.Comparable;
+class Student implements Comparable<Student>{
+    String name;
+    int age;
+    public Student(String name,int age){
+        this.name=name;
+        this.age=age;
+    }
+    public String toString(){
+        return this.name+" "+this.age;
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return 0;
+    }
+}
+public class lambda{
+    public static void main(String[] args){
+        ArrayList<Student> list=new ArrayList<>();
+        list.add(new Student("Ranjani",20));
+        list.add(new Student("Ganeshan",45));
+        list.add(new Student("Kaviya",16));
+        list.add(new Student("Sumathi",40));
+        Collections.sort(list,(i,j)->i.name.compareTo(j.name));
+        for(Student s:list){
+            System.out.println(s);
+        }
+    }
+}
+
+28. Stream API
+import java.util.*;
+public class odd{
+    public static void main(String[] args){
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.stream()
+                .filter(x->x%2==0)
+                .forEach(System.out::println);
+
+    }
+}
