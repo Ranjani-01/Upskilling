@@ -251,3 +251,92 @@ public class odd{
 
     }
 }
+
+31. Basic JDBC Connection
+import java.sql.*;
+class jdbcdemo{
+    public static void main(String[] args) throws SQLException {
+        String url="jdbc:mysql://localhost:3306/Students";
+        String username="root";
+        String password="root1234";
+        Connection con=DriverManager.getConnection(url,username,password);
+        Statement st=con.createStatement();
+        String sql="select * from pupils";
+        ResultSet res=st.executeQuery(sql);
+
+        while(res.next()){
+            System.out.println(res.getString(1)+" "+res.getInt(2)+" "+res.getString(3));
+        }
+    }
+}
+
+32. Insert Update operations in JDBC
+import java.sql.*;
+
+class jdbcex {
+    String name;
+    int age;
+    int id;
+
+    public jdbcex(String name, int age, int id) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+
+    jdbcex() throws SQLException {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    static class StudentDAO {
+        String url = "jdbc:mysql://localhost:3306/student1";
+        String username = "root";
+        String password = "root1234";
+        Connection con = DriverManager.getConnection(url, username, password);
+
+        StudentDAO() throws SQLException {
+        }
+
+
+        public void insertStudent(String name, int age, int id) throws SQLException {
+            String sql = "insert into people values(?,?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setInt(2, age);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+
+        }
+
+        public void updateStudent(String name, int age, int id) throws SQLException {
+            String sql = "update people set name=?,age=? where id=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setInt(2, age);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+            con.close();
+
+        }
+    }
+
+    public static void main(String[] args) throws SQLException {
+        StudentDAO obj = new StudentDAO();
+        jdbcex s1 = new jdbcex("ranjani", 21, 101);
+        obj.insertStudent(s1.getName(), s1.getAge(), s1.getId());
+        jdbcex s2 = new jdbcex("kaviya", 16, 102);
+        obj.updateStudent(s2.getName(), s2.getAge(), s2.getId());
+    }
+}
+
