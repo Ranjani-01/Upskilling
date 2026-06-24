@@ -340,3 +340,48 @@ class jdbcex {
     }
 }
 
+33. Transaction Handling in JDBC
+import java.sql.*;
+
+class bank{
+    public void transfer(int fromid,int toid,int amt) throws Exception{
+        String url="jdbc:mysql://localhost:3306/bankdb";
+        String username="root";
+        String password="root1234";
+        Connection con=DriverManager.getConnection(url,username,password);
+        try {
+            //debit
+            con.setAutoCommit(false);
+            String sql = "update bank set amount=amount-? where id=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, amt);
+            ps.setInt(2, fromid);
+            ps.executeUpdate();
+            ps.close();
+
+
+            //credit
+            String sql2="update bank set amount=amount+? where id=?";
+            PreparedStatement ps2 = con.prepareStatement(sql2);
+            ps2.setInt(1, amt);
+            ps2.setInt(2, toid);
+            ps2.executeUpdate();
+            ps2.close();
+
+            //commit after all changes
+            con.commit();
+            System.out.print("Transaction successful");
+            con.close();
+
+        } catch (SQLException ex) {
+            con.rollback();
+            ex.printStackTrace();
+        }
+
+
+    }
+    public static void main(String[] args) throws Exception {
+        bank obj=new bank();
+        obj.transfer(101,102,500);
+    }
+}
